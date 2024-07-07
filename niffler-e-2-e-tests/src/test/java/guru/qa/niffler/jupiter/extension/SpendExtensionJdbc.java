@@ -2,7 +2,6 @@ package guru.qa.niffler.jupiter.extension;
 
 import guru.qa.niffler.data.entity.SpendEntity;
 import guru.qa.niffler.data.repository.SpendRepository;
-import guru.qa.niffler.model.CategoryJson;
 import guru.qa.niffler.model.SpendJson;
 
 public class SpendExtensionJdbc extends AbstractSpendExtension {
@@ -10,8 +9,8 @@ public class SpendExtensionJdbc extends AbstractSpendExtension {
     private final SpendRepository spendRepository = SpendRepository.getInstance();
 
     @Override
-    protected SpendJson createSpend(SpendJson spend, CategoryJson category) {
-        SpendEntity spendEntity = SpendEntity.fromJson(spend, category);
+    protected SpendJson createSpend(SpendJson spend) {
+        SpendEntity spendEntity = SpendEntity.fromJson(spend);
         return SpendJson.fromEntity(spendRepository.createSpend(spendEntity));
     }
 
