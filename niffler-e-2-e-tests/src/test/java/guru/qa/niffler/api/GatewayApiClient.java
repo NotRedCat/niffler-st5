@@ -1,8 +1,8 @@
 package guru.qa.niffler.api;
 
 import guru.qa.niffler.model.*;
-import retrofit2.Call;
 
+import java.io.IOException;
 import java.util.List;
 
 public class GatewayApiClient extends ApiClient {
@@ -13,71 +13,101 @@ public class GatewayApiClient extends ApiClient {
         this.gatewayApi = retrofit.create(GatewayApi.class);
     }
 
-    public Call<List<SpendJson>> getSpends(String bearerToken) {
-        return gatewayApi.getSpends(bearerToken);
+    public List<SpendJson> getSpends(String bearerToken) throws IOException {
+        return gatewayApi.getSpends(bearerToken)
+                .execute()
+                .body();
     }
 
-    public Call<List<CategoryJson>> getCategories(String bearerToken) {
-        return gatewayApi.getCategories(bearerToken);
+    public List<CategoryJson> getCategories(String bearerToken) throws IOException {
+        return gatewayApi.getCategories(bearerToken)
+                .execute()
+                .body();
     }
 
-    public Call<CategoryJson> addCategory(String bearerToken, CategoryJson categoryJson) {
-        return gatewayApi.addCategory(bearerToken, categoryJson);
+    public CategoryJson addCategory(String bearerToken, CategoryJson categoryJson) throws IOException {
+        return gatewayApi.addCategory(bearerToken, categoryJson)
+                .execute()
+                .body();
     }
 
-    public Call<List<CurrencyJson>> getAllCurrencies(String bearerToken) {
-        return gatewayApi.getAllCurrencies(bearerToken);
+    public List<CurrencyJson> getAllCurrencies(String bearerToken) throws IOException {
+        return gatewayApi.getAllCurrencies(bearerToken)
+                .execute()
+                .body();
     }
 
-    public Call<UserJson> currentUser(String bearerToken) {
-        return gatewayApi.currentUser(bearerToken);
+    public UserJson currentUser(String bearerToken) throws IOException {
+        return gatewayApi.currentUser(bearerToken)
+                .execute()
+                .body();
     }
 
-    public Call<List<UserJson>> friends(String bearerToken) {
-        return gatewayApi.friends(bearerToken);
+    public List<UserJson> friends(String bearerToken) throws IOException {
+        return gatewayApi.friends(bearerToken)
+                .execute()
+                .body();
     }
 
-    public void removeFriend(String bearerToken, String username) {
-        gatewayApi.removeFriend(bearerToken, username);
+    public void removeFriend(String bearerToken, String username) throws IOException {
+        gatewayApi.removeFriend(bearerToken, username).execute();
     }
 
-    public Call<List<UserJson>> incomeInvitations(String bearerToken) {
-        return gatewayApi.incomeInvitations(bearerToken);
+    public List<UserJson> incomeInvitations(String bearerToken) throws IOException {
+        return gatewayApi.incomeInvitations(bearerToken)
+                .execute()
+                .body();
     }
 
-    public Call<List<UserJson>> outcomeInvitations(String bearerToken) {
-        return gatewayApi.outcomeInvitations(bearerToken);
+    public List<UserJson> outcomeInvitations(String bearerToken) throws IOException {
+        return gatewayApi.outcomeInvitations(bearerToken)
+                .execute()
+                .body();
     }
 
-    public Call<UserJson> sendInvitation(String bearerToken, FriendJson friend) {
-        return gatewayApi.sendInvitation(bearerToken, friend);
+    public UserJson sendInvitation(String bearerToken, FriendJson friend) throws IOException {
+        return gatewayApi.sendInvitation(bearerToken, friend)
+                .execute()
+                .body();
     }
 
-    public Call<UserJson> acceptInvitation(String bearerToken, FriendJson friend) {
-        return gatewayApi.acceptInvitation(bearerToken, friend);
+    public UserJson acceptInvitation(String bearerToken, FriendJson friend) throws IOException {
+        return gatewayApi.acceptInvitation(bearerToken, friend)
+                .execute()
+                .body();
     }
 
-    public Call<UserJson> declineInvitation(String bearerToken, FriendJson friend) {
-        return gatewayApi.declineInvitation(bearerToken, friend);
+    public UserJson declineInvitation(String bearerToken, FriendJson friend) throws IOException {
+        return gatewayApi.declineInvitation(bearerToken, friend)
+                .execute()
+                .body();
     }
 
-    public Call<List<UserJson>> allUsers(String bearerToken) {
-        return gatewayApi.allUsers(bearerToken);
+    public List<UserJson> allUsers(String bearerToken) throws IOException {
+        return gatewayApi.allUsers(bearerToken)
+                .execute()
+                .body();
     }
 
-    public Call<SpendJson> addSpend(String bearerToken, SpendJson spendJson) {
-        return gatewayApi.addSpend(bearerToken, spendJson);
+    public SpendJson addSpend(String bearerToken, SpendJson spendJson) throws IOException {
+        return gatewayApi.addSpend(bearerToken, spendJson)
+                .execute()
+                .body();
     }
 
-    public void deleteSpends(String bearerToken, List<String> ids) {
-        gatewayApi.deleteSpends(bearerToken, ids);
+    public void deleteSpends(String bearerToken, List<String> ids) throws IOException {
+        gatewayApi.deleteSpends(bearerToken, ids).execute();
     }
 
-    public Call<SpendJson> editSpend(String bearerToken, SpendJson spendJson) {
-        return gatewayApi.editSpend(bearerToken, spendJson);
+    public SpendJson editSpend(String bearerToken, SpendJson spendJson) throws IOException {
+        return gatewayApi.editSpend(bearerToken, spendJson)
+                .execute()
+                .body();
     }
 
-    public Call<UserJson> updateUserInfo(String bearerToken, UserJson userJson) {
-        return gatewayApi.updateUserInfo(bearerToken, userJson);
+    public UserJson updateUserInfo(String bearerToken, UserJson userJson) throws IOException {
+        return gatewayApi.updateUserInfo(bearerToken, userJson)
+                .execute()
+                .body();
     }
 }
