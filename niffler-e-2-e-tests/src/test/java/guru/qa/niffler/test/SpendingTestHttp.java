@@ -43,12 +43,6 @@ public class SpendingTestHttp extends BaseWebTest{
         .clickLoginButton();
         authPage.login("Nastiletko", "bB!123456");
     }
-
-//    @GenerateSpend(
-//            description = "QA.GURU Advanced 5",
-//            amount = 65000.00,
-//            currency = CurrencyValues.RUB
-//    )
     @GenerateCategory(
             category = "Обучение",
             username = "Nastiletko"
