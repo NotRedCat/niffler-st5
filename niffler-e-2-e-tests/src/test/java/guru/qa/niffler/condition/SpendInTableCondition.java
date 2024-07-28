@@ -12,12 +12,14 @@ import org.openqa.selenium.WebElement;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class SpendInTableCondition extends WebElementsCondition {
 
-
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd MMM yy", Locale.ENGLISH);
     private final SpendJson[] expectedSpends;
 
 
@@ -31,32 +33,73 @@ public class SpendInTableCondition extends WebElementsCondition {
 
         if (elements.size() != expectedSpends.length) {
             return CheckResult.rejected(
-                    "Spending table size mismatch ",
+                    "Spending table size mismatch",
                     elements.size()
             );
         }
 
-        boolean result = false;
-
         for (int i = 0; i < elements.size(); i++) {
             WebElement row = elements.get(i);
-            SpendJson expected = expectedSpends[i];
+            SpendJson expectedSpendForRow = expectedSpends[i];
 
             List<WebElement> td = row.findElements(By.cssSelector("td"));
 
-            result = td.get(1).getText().contains(
-                    DateUtils.formatDate(
-                            expected.spendDate(),
-                            "dd MMMM yy"));
+            boolean dateResult = td.get(1).getText().contains(
+                   DATE_FORMAT.format(
+                           expectedSpendForRow.spendDate()
+                    )
+            );
 
-            result = td.get(2).getText().contains(
-                    String.valueOf(expected.amount()));
+            if (!dateResult) {
+                return CheckResult.rejected(
+                        "Spending table: date mismatch",
+                        td.get(1).getText()
+                );
+            }
 
+            boolean amountResult = Double.valueOf(td.get(2).getText()).equals(expectedSpendForRow.amount());
+
+            if (!amountResult) {
+                return CheckResult.rejected(
+                        "Spending table: amount mismatch",
+                        td.get(2).getText()
+                );
+            }
+
+            boolean currencyResult = td.get(3).getText().contains(
+                    expectedSpendForRow.currency().name()
+            );
+
+            if (!currencyResult) {
+                return CheckResult.rejected(
+                        "Spending table: currency mismatch",
+                        td.get(3).getText()
+                );
+            }
+
+            boolean categoryResult = td.get(4).getText().contains(
+                    expectedSpendForRow.category()
+            );
+
+            if (!categoryResult) {
+                return CheckResult.rejected(
+                        "Spending table: category mismatch",
+                        td.get(4).getText()
+                );
+            }
+
+            boolean descriptionResult = td.get(5).getText().contains(
+                    expectedSpendForRow.description()
+            );
+
+            if (!descriptionResult) {
+                return CheckResult.rejected(
+                        "Spending table: description mismatch",
+                        td.get(5).getText()
+                );
+            }
         }
-        return result
-                ? CheckResult.accepted()
-                : CheckResult.rejected("Spending table content mismatch",
-                "");
+        return CheckResult.accepted();
     }
 
     @Override
