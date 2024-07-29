@@ -65,7 +65,7 @@ public class SpendRepositorySpringJdbc implements SpendRepository {
                             "INSERT INTO spend(username, spend_date, currency, amount, description, category_id) VALUES (?, ?, ?, ?, ?, ?)",
                             PreparedStatement.RETURN_GENERATED_KEYS);
                     ps.setString(1, spend.getUsername());
-                    ps.setObject(2, new java.sql.Date(spend.getSpendDate().getTime()));
+                    ps.setDate(2, new java.sql.Date(spend.getSpendDate().getTime()));
                     ps.setObject(3, spend.getCurrency().name());
                     ps.setDouble(4, spend.getAmount());
                     ps.setString(5, spend.getDescription());

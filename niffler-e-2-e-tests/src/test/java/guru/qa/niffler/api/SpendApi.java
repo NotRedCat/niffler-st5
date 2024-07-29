@@ -15,10 +15,10 @@ public interface SpendApi {
     Call<CategoryJson> createCategory(@Body CategoryJson spendJson);
 
     @DELETE("internal/spends/remove")
-    Call<SpendJson> removeSpend(@Query("ids") List<String> ids);
+    Call<Void> removeSpend(@Query("ids") List<String> ids);
 
     @DELETE("internal/categories/remove")
-    Call<CategoryJson> removeCategory(@Query("ids") List<String> ids);
+    Call<Void> removeCategory(@Query("ids") List<String> ids);
 
 
 }
