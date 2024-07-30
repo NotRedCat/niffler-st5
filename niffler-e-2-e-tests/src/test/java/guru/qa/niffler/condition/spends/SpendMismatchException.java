@@ -1,4 +1,4 @@
-package guru.qa.niffler.condition;
+package guru.qa.niffler.condition.spends;
 
 import com.codeborne.selenide.ex.UIAssertionError;
 import com.codeborne.selenide.impl.CollectionSource;
@@ -16,8 +16,8 @@ public class SpendMismatchException extends UIAssertionError {
         super(
                 collection.driver(),
                 message +
-                        lineSeparator() + "Actual: " + actualElementText +
-                        lineSeparator() + "Expected: " + expected +
+                        lineSeparator() + "Actual: " + lineSeparator() + actualElementText +
+                        lineSeparator() + "Expected: " + lineSeparator() + expected +
                         (explanation == null ? "" : lineSeparator() + "Because: " + explanation) +
                         lineSeparator() + "Collection: " + collection.description(),
                 expected, actualElementText,

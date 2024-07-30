@@ -23,10 +23,15 @@ public class MainPage extends BasePage<MainPage> {
     private final SelenideElement peopleButton = $("a[href*='people']");
     private final SelenideElement logOutButton = $(".header__logout");
     private final ReactCalendar calendar = new ReactCalendar();
+
     public MainPage openPage() {
 
         Selenide.open("http://127.0.0.1:3000/main");
         return this;
+    }
+
+    public ElementsCollection getSpendsRows() {
+        return spendingRows;
     }
 
     public MainPage clickCheckbox(String description) {

@@ -1,5 +1,6 @@
 package guru.qa.niffler.pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
@@ -20,7 +21,11 @@ public class FriendsPage {
         Selenide.open("http://127.0.0.1:3000/friends");
         return this;
     }
-
+    public ElementsCollection getFriendsRow() {
+        ElementsCollection usersRow = $(".people-content .abstract-table tbody")
+                .$$("tr");
+        return usersRow;
+    }
     public void checkNoFriendsMessage() {
 
         tableMessage.shouldHave(text("There are no friends yet!"));
