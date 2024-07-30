@@ -16,7 +16,6 @@ public class UsersQueueTest {
 
     static {
         Configuration.browserSize = "1920x1080";
-        Configuration.holdBrowserOpen = true;
     }
 
     StartPage startPage = new StartPage();
