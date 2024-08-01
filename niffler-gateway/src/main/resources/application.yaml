@@ -16,7 +16,8 @@ logging:
     org.springframework.security.oauth2: DEBUG
     net.devh.boot.grpc: DEBUG
 #    org.springframework.boot.autoconfigure: DEBUG
-
+file:
+  name: "gateway.log"
 niffler-userdata:
   client: soap
 
@@ -42,7 +43,7 @@ spring:
 grpc:
   client:
     grpcCurrencyClient:
-      address: 'static://localhost:8092'
+      address: 'static://127.0.0.1:8092'
       negotiationType: PLAINTEXT
 
 niffler-currency:
