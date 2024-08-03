@@ -35,7 +35,8 @@ public class    UserQueueExtension implements
                 simpleUser("Nastiletko", "bB!123456"))));
         USERS.put(User.UserType.WITH_FRIEND, new ConcurrentLinkedQueue<>(
                 List.of(simpleUser("Nastiletko1", "bB!123456"),
-                        simpleUser("Nastiletko2", "bB!123456"))));
+                        simpleUser("Nastiletko2", "Nasty", "Letko"),
+                        simpleUser("Nastiletko5", null, null))));
         USERS.put(User.UserType.INVITATION_RECIEVED, new ConcurrentLinkedQueue<>(
                 List.of(simpleUser("Nastiletko3", "bB!123456"))));
         USERS.put(User.UserType.DEFAULT_USER, new ConcurrentLinkedQueue<>(

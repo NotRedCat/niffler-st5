@@ -16,7 +16,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.codeborne.selenide.Selenide.$;
-import static guru.qa.niffler.condition.SpendsCondition.spendsInTable;
+import static guru.qa.niffler.condition.spends.SpendsCondition.spendsInTable;
 
 
 @ExtendWith({ApiCategoryExtension.class, ApiSpendExtension.class})
@@ -24,7 +24,6 @@ public class SpendingTestHttp extends BaseWebTest{
 
     static {
         Configuration.browserSize = "1920x1080";
-        Configuration.holdBrowserOpen = true;
     }
 
     @BeforeAll
@@ -56,7 +55,7 @@ public class SpendingTestHttp extends BaseWebTest{
                     ),
                     @GenerateSpend(
                             description = "QA.GURU Advanced 5 - написание кода",
-                            amount = 5500.00,
+                            amount = 5500.94,
                             currency = CurrencyValues.RUB
                     )
 
@@ -65,10 +64,10 @@ public class SpendingTestHttp extends BaseWebTest{
 
     @Test
     void checkSpendingContent(SpendJson[] spends) {
-        ElementsCollection spendings = $(".spendings-table tbody")
-                .$$("tr");
 
-        spendings.get(0).scrollIntoView(true);
+        MainPage mainPage = new MainPage();
+        ElementsCollection spendings = mainPage.getSpendsRows();
+
         spendings.shouldHave(spendsInTable(spends));
     }
 

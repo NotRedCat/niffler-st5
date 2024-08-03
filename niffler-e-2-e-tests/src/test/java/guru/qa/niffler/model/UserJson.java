@@ -31,6 +31,23 @@ public record UserJson(
         @JsonIgnore
         TestData testData) {
 
+    public static UserJson simpleUser(String username, String firstname, String surname) {
+        return new UserJson(
+                null,
+                username,
+                firstname,
+                surname,
+                null,
+                null,
+                null,
+                null,
+                new TestData(
+                        null
+                )
+
+        );
+    }
+
     public static UserJson simpleUser(String username, String password) {
         return new UserJson(
                 null,
