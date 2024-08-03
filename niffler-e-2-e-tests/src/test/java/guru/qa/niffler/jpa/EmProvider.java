@@ -23,7 +23,7 @@ public enum EmProvider {
             props.put("hibernate.connection.password", "secret");
             props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
             props.put("hibernate.connection.driver_class", "com.p6spy.engine.spy.P6SpyDriver");
-//props.put("hibernate.hbm2ddl.auto", "create");
+
 
             return Persistence.createEntityManagerFactory("niffler-st5",
                     props);

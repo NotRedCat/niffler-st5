@@ -3,7 +3,6 @@ package guru.qa.niffler.jupiter.extension;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureLifecycle;
-import io.qameta.allure.model.Status;
 import io.qameta.allure.model.TestResult;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -15,32 +14,28 @@ import java.util.UUID;
 public class AllureLogsExtension implements SuiteExtension {
 
     public static final String caseName = "logs";
+
     @SneakyThrows
     @Override
     public void afterSuite() {
         String caseId = UUID.randomUUID().toString();
-        AllureLifecycle allureLifecycle = Allure.getLifecycle();
-        allureLifecycle.scheduleTestCase(
-                new TestResult()
-                        .setUuid(caseId)
-                        .setName(caseName)
-                        .setStatus(Status.PASSED));
-        allureLifecycle.startTestCase(caseId);
+        AllureLifecycle lifecycle = Allure.getLifecycle();
+        lifecycle.scheduleTestCase(new TestResult().setUuid(caseId).setName(caseName));
+        lifecycle.startTestCase(caseId);
 
+        lifecycle.addAttachment("auth log", "text/html", ".log", Files.newInputStream(
+                Path.of("./auth.log")));
+        lifecycle.addAttachment("currency log", "text/html", ".log", Files.newInputStream(
+                Path.of("./currency.log")));
+        lifecycle.addAttachment("gateway log", "text/html", ".log", Files.newInputStream(
+                Path.of("./gateway.log")));
+        lifecycle.addAttachment("spend log", "text/html", ".log", Files.newInputStream(
+                Path.of("./spend.log")));
+        lifecycle.addAttachment("userdata log", "text/html", ".log", Files.newInputStream(
+                Path.of("./userdata.log")));
 
-        allureLifecycle.addAttachment("niffler-auth.log", "text/html", ".logs",
-                Files.newInputStream(Path.of("./auth.log")));
-        allureLifecycle.addAttachment("niffler-currency.log", "text/html", ".logs",
-                Files.newInputStream(Path.of("./currency.log")));
-        allureLifecycle.addAttachment("niffler-gateway.log", "text/html", ".logs",
-                Files.newInputStream(Path.of("./gateway.log")));
-        allureLifecycle.addAttachment("niffler-spend.log", "text/html", ".logs",
-                Files.newInputStream(Path.of("./spend.log")));
-        allureLifecycle.addAttachment("niffler-userdata.log", "text/html", ".logs",
-                Files.newInputStream(Path.of("./userdata.log")));
-
-        allureLifecycle.stopTestCase(caseId);
-        allureLifecycle.writeTestCase(caseId);
+        lifecycle.startTestCase(caseId);
+        lifecycle.writeTestCase(caseId);
     }
 
     @Override
