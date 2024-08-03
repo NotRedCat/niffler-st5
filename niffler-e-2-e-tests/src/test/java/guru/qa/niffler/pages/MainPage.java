@@ -22,6 +22,7 @@ public class MainPage extends BasePage<MainPage> {
     private final SelenideElement friendsButton = $("a[href*='friends']");
     private final SelenideElement peopleButton = $("a[href*='people']");
     private final SelenideElement logOutButton = $(".header__logout");
+    private final SelenideElement avatar = $(".header__avatar");
     private final ReactCalendar calendar = new ReactCalendar();
 
     public MainPage openPage() {
@@ -61,6 +62,12 @@ public class MainPage extends BasePage<MainPage> {
     public MainPage checkSpendingsCount(int count) {
 
         spendingRows.shouldHave(size(count));
+        return this;
+    }
+
+    public MainPage checkAvatarVisible() {
+
+        avatar.shouldBe(visible);
         return this;
     }
 

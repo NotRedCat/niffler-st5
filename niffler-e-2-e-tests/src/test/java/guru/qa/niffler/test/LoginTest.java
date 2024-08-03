@@ -9,7 +9,6 @@ import guru.qa.niffler.util.DbCreateUserExtension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(DbCreateUserExtension.class)
 public class LoginTest extends BaseWebTest {
 
@@ -23,7 +22,7 @@ public class LoginTest extends BaseWebTest {
         startPage.openPage()
                 .clickLoginButton();
         authPage.login(userJson.username(), userJson.testData().password());
-        mainPage.openPage()
-                .checkSpendingsSectionIsVisible();
+        mainPage
+                .checkAvatarVisible();
     }
 }
