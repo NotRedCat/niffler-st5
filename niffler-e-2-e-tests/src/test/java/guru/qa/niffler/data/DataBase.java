@@ -1,7 +1,6 @@
 package guru.qa.niffler.data;
 
 import guru.qa.niffler.config.Config;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
