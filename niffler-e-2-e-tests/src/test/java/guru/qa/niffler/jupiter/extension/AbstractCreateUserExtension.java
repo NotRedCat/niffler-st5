@@ -1,5 +1,6 @@
 package guru.qa.niffler.jupiter.extension;
 
+import guru.qa.niffler.jupiter.annotation.ApiLogin;
 import guru.qa.niffler.jupiter.annotation.TestUser;
 import guru.qa.niffler.model.UserJson;
 import org.junit.jupiter.api.extension.*;
@@ -28,6 +29,20 @@ public abstract class AbstractCreateUserExtension implements BeforeEachCallback,
                 .ifPresent(testUser -> extensionContext
                         .getStore(NAMESPACE).put(extensionContext.getUniqueId(), createUser(UserJson.testUser()))
                 );
+        AnnotationSupport.findAnnotation(extensionContext.getRequiredTestMethod(), ApiLogin.class)
+                .ifPresent(apiLogin ->
+                {
+                    if (!apiLogin.username().isEmpty() && !apiLogin.password().isEmpty()) {
+                        extensionContext
+                                .getStore(NAMESPACE).put(extensionContext.getUniqueId(),
+                                        createUser(UserJson.testUser(apiLogin.username(), apiLogin.password())));
+                    } else {
+                        extensionContext
+                                .getStore(NAMESPACE).put(extensionContext.getUniqueId(),
+                                        createUser(UserJson.testUser()));
+                    }
+                });
+
     }
 
     protected abstract UserJson createUser(UserJson user);

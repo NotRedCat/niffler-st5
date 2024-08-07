@@ -65,6 +65,22 @@ public record UserJson(
         );
     }
 
+    public static UserJson testUser(String username, String password) {
+        Faker faker = new Faker();
+        return new UserJson(
+                null,
+                username,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                CurrencyValues.RUB,
+                null,
+                null,
+                null,
+                new TestData(
+                        password
+                )
+        );
+    }
     public static UserJson testUser() {
         Faker faker = new Faker();
         return new UserJson(
