@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.platform.commons.support.AnnotationSupport;
 
-import static guru.qa.niffler.jupiter.extension.ContextExtension.context;
+import static guru.qa.niffler.jupiter.extension.ContextHolderExtension.context;
 
 public class ApiLoginExtension implements BeforeEachCallback, AfterEachCallback {
 
