@@ -3,6 +3,7 @@ package guru.qa.niffler.jupiter.extension;
 import guru.qa.niffler.api.AuthApiClient;
 import guru.qa.niffler.api.cookie.ThreadSafeCookieStore;
 import guru.qa.niffler.jupiter.annotation.ApiLogin;
+import guru.qa.niffler.model.UserJson;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -21,7 +22,13 @@ public class ApiLoginExtension implements BeforeEachCallback, AfterEachCallback 
                 context.getRequiredTestMethod(),
                 ApiLogin.class
         ).ifPresent(annotation -> {
-            authApiClient.doLogin(annotation.username(), annotation.password());
+            if (!annotation.username().isEmpty() && !annotation.password().isEmpty())
+                authApiClient.doLogin(annotation.username(), annotation.password());
+            else {
+                UserJson userJson = context.getStore(AbstractCreateUserExtension.NAMESPACE)
+                        .get(context.getUniqueId(), UserJson.class);
+                authApiClient.doLogin(userJson.username(), userJson.testData().password());
+            }
         });
     }
 

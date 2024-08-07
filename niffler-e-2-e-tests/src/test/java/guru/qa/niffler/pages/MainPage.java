@@ -12,6 +12,8 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class MainPage extends BasePage<MainPage> {
 
+    public static final String URL = CFG.frontUrl() + "main";
+
     private final ElementsCollection spendingRows = $(".spendings-table tbody")
             .$$("tr");
 

@@ -11,9 +11,12 @@ public class ProfilePage extends BasePage<ProfilePage> {
 
     private final SelenideElement avatar = $(".profile__avatar");
 
-    public ProfilePage setName(String name, String surname) {
+    public ProfilePage setName(String name) {
         $("[name='firstname']").setValue(name);
-        $("[name='surname']").setValue(name);
+        return this;
+    }
+    public ProfilePage acceptChanges() {
+        $("[type='submit']").click();
         return this;
     }
 
